@@ -1,0 +1,5 @@
+# Project exclude paths
+/JDBC/dbtech_jdbc/bin/
+/JDBC/dbtech_procedure/bin/
+/JDBC/dbtech_service/bin/
+/JDBC/jdbc_demo/bin/

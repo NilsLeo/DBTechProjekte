@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_jdbc/dbtech_jdbc.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_jdbc/dbtech_jdbc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_lib/dbtech_lib.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_lib/dbtech_lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_procedure/dbtech_procedure.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_procedure/dbtech_procedure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_service/dbtech_service.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_service/dbtech_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/jdbc_demo/jdbc_demo.iml" filepath="$PROJECT_DIR$/JDBC/jdbc_demo/jdbc_demo.iml" />
+    </modules>
+  </component>
+</project>
