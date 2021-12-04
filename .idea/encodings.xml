@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
-    <file url="file://$PROJECT_DIR$/JDBC/dbtech_jdbc/src/main/java/de/htwberlin/utils/DbCred.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/JDBC/dbtech_jdbc/src/test/java/de/htwberlin/maut/test/MautVerwaltungTest.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/JDBC/dbtech_service/src/main/java/de/htwberlin/mauterhebung/IMauterhebung.java" charset="windows-1252" />
-    <file url="file://$PROJECT_DIR$/JDBC/dbtech_service/src/test/java/de/htwberlin/maut/test/MautServiceTest.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/JDBC/dbtech_service_dao_sample/dbtech_service_dao_sample/src/main/java/de/htwberlin/dao/BuchungDaoImpl.java" charset="windows-1252" />
+    <file url="PROJECT" charset="windows-1252" />
   </component>
 </project>

@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/JDBC/DAO_Pattern/DAO_Pattern/DAO_Pattern.iml" filepath="$PROJECT_DIR$/JDBC/DAO_Pattern/DAO_Pattern/DAO_Pattern.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_jdbc/dbtech_jdbc.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_jdbc/dbtech_jdbc.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_lib/dbtech_lib.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_lib/dbtech_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_procedure/dbtech_procedure.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_procedure/dbtech_procedure.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_service/dbtech_service.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_service/dbtech_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JDBC/dbtech_service_dao_sample/dbtech_service_dao_sample/dbtech_service_dao_sample.iml" filepath="$PROJECT_DIR$/JDBC/dbtech_service_dao_sample/dbtech_service_dao_sample/dbtech_service_dao_sample.iml" />
       <module fileurl="file://$PROJECT_DIR$/JDBC/jdbc_demo/jdbc_demo.iml" filepath="$PROJECT_DIR$/JDBC/jdbc_demo/jdbc_demo.iml" />
     </modules>
   </component>

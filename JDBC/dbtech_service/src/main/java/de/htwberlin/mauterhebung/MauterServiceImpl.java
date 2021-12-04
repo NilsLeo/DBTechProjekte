@@ -53,20 +53,17 @@ public class MauterServiceImpl implements IMauterhebung {
 		float berechneteMaut = 0;
 		return berechneteMaut;
 	}
-	/**
-	 * Prueft, ob die Achszahl über die gebuchte Mautkategorie ermittelbar ist
-	 * @param achszahl, die Achszahl der gebuchten Mautkategorie
-	 * @return true wenn das Fahrzeug registiert ist || false wenn nicht
-	 **/
 	private boolean correctNumberOfAxles(int achszahl) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 
 		try {
-			String queryString = "SELECT ";
+			String queryString = "SELECT SUM( ANZAHL ) AS ANZAHL FROM (SELECT COUNT(ACHSEN) AS ANZAHL FROM FAHRZEUG "
+			+ "INNER JOIN SCHADSTOFFKLASSE ON SCHADSTOFFKLASSE.SSKL_ID = FAHRZEUG.SSKL_ID "
+					+ "INNER JOIN MAUTKATEGORIE ON MAUTKATEGORIE.SSKL_ID = SCHADSTOFFKLASSE.SSKL_ID WHERE ACHSEN = ? AND ACHSZAHL = ?)";
 			preparedStatement = getConnection().prepareStatement(queryString);
-			preparedStatement.setString(1, kennzeichen);
-			preparedStatement.setString(2, kennzeichen);
+			preparedStatement.setInt(1, achszahl);
+			preparedStatement.setString(2, "= "+ achszahl);
 			resultSet = preparedStatement.executeQuery();
 			if (resultSet.next()) {
 				return resultSet.getLong("ANZAHL") > 0;
@@ -79,6 +76,10 @@ public class MauterServiceImpl implements IMauterhebung {
 		}
 
 	}
+	/*
+				String queryString = "SELECT SUM( ANZAHL ) AS ANZAHL FROM (SELECT COUNT(ACHSEN) AS ANZAHL FROM FAHRZEUG "
+			+ "WHERE ACHSEN = ? UNION ALL SELECT COUNT(ACHSZAHL) AS ANZAHL FROM MAUTKATEGORIE WHERE ACHSZAHL = ?)";
+	 */
 
 	/**
 	 * prueft, ob das Fahrzeug bereits registriert und aktiv ist oder eine
@@ -114,4 +115,10 @@ public class MauterServiceImpl implements IMauterhebung {
 	}
 
 }
+/*
+	String queryString = "SELECT ACHSEN, ACHSZAHL FROM BUCHUNG "
+			+ "INNER JOIN MAUTKATEGORIE ON BUCHUNG.KATEGORIE_ID = MAUTKATEGORIE.KATEGORIE_ID "
+			+ "INNER JOIN SCHADSTOFFKLASSE ON SCHADSTOFFKLASSE.SSKL_ID = MAUTKATEGORIE.SSKL_ID "
+			+ "INNER JOIN FAHRZEUG ON SCHADSTOFFKLASSE.SSKL_ID = FAHRZEUG.SSKL_ID WHERE ACHSZAHL = ";
 
+ */
