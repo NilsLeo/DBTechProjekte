@@ -52,14 +52,22 @@ public class MauterServiceImpl implements IMauterhebung {
 		if (!isVehicleRegistered(kennzeichen)) {
 			throw new UnkownVehicleException("Das Fahrzeug ist nicht bekannt!-> Mautpreller");
 		}
-		if (!compareAxles(kennzeichen, achszahl)) {
-			throw new InvalidVehicleDataException("die Achszahl stimmt nicht überein");
+		if(!manualProcedure(kennzeichen)) {
+			if (!compareAxles(kennzeichen, achszahl)) {
+				throw new InvalidVehicleDataException("die Achszahl stimmt nicht überein");
+			}
 		}
-		if(manualProcedure(kennzeichen) == true){
+		if(manualProcedure(kennzeichen)) {
+			if (!compareNoOfAxles(kennzeichen, achszahl)) {
+				throw new InvalidVehicleDataException("die Achszahl stimmt nicht überein");
+			}
+		}
+
+		if(manualProcedure(kennzeichen)){
 			if(alreadyCruised(kennzeichen)){
 				throw new AlreadyCruisedException("Es liegt eine Doppelbefahrung vor");
 			}
-			if(openManualProcedure(kennzeichen) == true) {
+			if(openManualProcedure(kennzeichen)) {
 				BuchungDao b_dao = new BuchungDaoImpl(getConnection());
 				Buchung b = b_dao.findBuchung(1111);
 				b.setB_id(3);
@@ -136,35 +144,44 @@ public class MauterServiceImpl implements IMauterhebung {
 			throw new RuntimeException(e);
 		}
 	}
-	private boolean compareAxles(String kennzeichen, int achszahl) {
+	private boolean compareNoOfAxles(String kennzeichen, int achszahl) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
+		String expression = null;
+		Boolean result = null;
+		boolean res = false;
 		try {
 			String queryString = "SELECT ACHSZAHL FROM BUCHUNG " +
-					"INNER JOIN MAUTKATEGORIE ON BUCHUNG.KATEGORIE_ID = MAUTKATEGORIE.KATEGORIE_ID WHERE KENNZEICHEN = ?";
+					"INNER JOIN MAUTKATEGORIE ON BUCHUNG.KATEGORIE_ID = MAUTKATEGORIE.KATEGORIE_ID WHERE KENNZEICHEN = ? AND B_ID =1";
 			preparedStatement = getConnection().prepareStatement(queryString);
 			preparedStatement.setString(1, kennzeichen);
 			resultSet = preparedStatement.executeQuery();
 			List<String> achszahlList = new ArrayList<String>();
-			if (resultSet.next()) {
-				achszahlList.add(resultSet.getString("STATUS"));
-				for (int i = 0; i<achszahlList.size();i++){
-					if(achszahlList)
+			while(resultSet.next()) {
+				achszahlList.add(resultSet.getString("ACHSZAHL"));
+				for (String achs : achszahlList) {
+					if (achs.contains(">=") || achs.contains("<=")) {
+						expression = String.valueOf(achszahl) + resultSet.getString("ACHSZAHL");
+					} else {
+						expression = String.valueOf(achszahl) + "=" + resultSet.getString("ACHSZAHL");
+					}
 				}
-
 				ScriptEngineManager mgr = new ScriptEngineManager();
 				ScriptEngine engine = mgr.getEngineByName("JavaScript");
-				String expression = String.valueOf(achszahl) + resultSet.getString("ACHSZAHL");
-				return Boolean.valueOf();
-			} else {
-				return false;
+				result = Boolean.valueOf(expression);
+				res = result;
+
 			}
+			if(res){
+				return true;
+			}
+			else{return false;}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
-	/*
 	private boolean compareAxles(String kennzeichen, int achszahl) {
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
@@ -183,8 +200,6 @@ public class MauterServiceImpl implements IMauterhebung {
 			throw new RuntimeException(e);
 		}
 	}
-
-	 */
 
 	/**
 	 * prueft, ob das Fahrzeug bereits registriert und aktiv ist oder eine
