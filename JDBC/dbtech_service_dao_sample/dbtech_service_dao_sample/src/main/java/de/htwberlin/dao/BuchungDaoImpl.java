@@ -1,16 +1,22 @@
 package de.htwberlin.dao;
 
-import de.htwberlin.exceptions.DataException;
-import de.htwberlin.object.Buchung;
-
 import java.sql.Connection;
+
+/**
+ * Die Klasse realisiert die Implementierung des Buchungsservice
+ * 
+ * @author Patrick Dohmeier
+ * **/
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import de.htwberlin.exceptions.DataException;
+import de.htwberlin.object.Buchung;
+
 /**
  * Die Klasse zeigt die Implementierung des BuchungDao an einem Beispiel
- *
+ * 
  * @author Patrick Dohmeier
  **/
 public class BuchungDaoImpl implements BuchungDao {
@@ -61,33 +67,6 @@ public class BuchungDaoImpl implements BuchungDao {
 		try {
 			ps = getConnection().prepareStatement(query);
 			ps.setInt(1, Buchungid);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				b = new Buchung();
-				b.setBuchung_id(rs.getInt("BUCHUNG_ID"));
-				b.setB_id(rs.getInt("B_ID"));
-				b.setAbschnitts_id(rs.getInt("ABSCHNITTS_ID"));
-				b.setKategorie_id(rs.getInt("KATEGORIE_ID"));
-				b.setKennzeichen(rs.getString("KENNZEICHEN"));
-
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return b;
-	}
-	@Override
-	public Buchung findBuchung(String kennzeichen) {
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String query = "select * from Buchung where kennzeichen = ?";
-		Buchung b = null;
-		try {
-			ps = getConnection().prepareStatement(query);
-			ps.setString(1, kennzeichen);
 
 			rs = ps.executeQuery();
 
