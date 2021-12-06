@@ -67,7 +67,7 @@ public class MauterServiceImpl implements IMauterhebung {
         if (isVehicleRegistered(kennzeichen) && !automaticProcedure(kennzeichen)) {
             if (openManualProcedure(kennzeichen, mautAbschnitt)) {
                 BuchungDao b_dao = new BuchungDaoImpl(getConnection());
-                Buchung b = b_dao.findBuchung(findbuchungsid(kennzeichen, mautAbschnitt));
+                Buchung b = b_dao.findBuchung(kennzeichen, mautAbschnitt, 1);
                 b.setB_id(3);
                 java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                 b.setBefahrungsdatum(date);
@@ -154,29 +154,6 @@ public class MauterServiceImpl implements IMauterhebung {
             throw new RuntimeException(e);
         }
     }
-        /*
-        try {
-            String qString = "SELECT MAUTSATZ_JE_KM FROM MAUTKATEGORIE WHERE ACHSZAHL= ? AND SSKL_ID = ?";
-            pst = getConnection().prepareStatement(qString);
-            pst.setString(1, ">= " + String.valueOf(achszahl));
-            pst.setInt(2, sskl_id);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                input = rs.getFloat("MAUTSATZ_JE_KM") / 100;
-                DecimalFormat df = new DecimalFormat("#.###");
-                strMautsatzJeKm = df.format(input).replaceAll(",", ".");
-                mautsatzJeKm = Float.parseFloat(strMautsatzJeKm);
-            }
-            // System.out.println("mautsatzJeKm: " + mautsatzJeKm);
-            return mautsatzJeKm;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
-
-         */
-
     /**
      * Überprüft, ob es sich um ein manuelles Verfahren mit offenem Buchungsstatus handelt
      * @autor Gruppe 07
