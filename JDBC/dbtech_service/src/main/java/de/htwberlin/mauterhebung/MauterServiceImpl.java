@@ -20,7 +20,7 @@ import de.htwberlin.exceptions.UnkownVehicleException;
 /**
  * Die Klasse realisiert den AusleiheService.
  *
- * @author Patrick Dohmeier
+ * @author Patrick Dohmeier, Gruppe 07
  */
 
 public class MauterServiceImpl implements IMauterhebung {
@@ -28,12 +28,6 @@ public class MauterServiceImpl implements IMauterhebung {
     private static final Logger L = LoggerFactory.getLogger(MauterServiceImpl.class);
     private Connection connection;
 
-    /**
-     * Speichert die uebergebene Datenbankverbindung in einer Instanzvariablen.
-     *
-     * @param connection die Verbuindung
-     * @author Ingo Classen
-     */
     @Override
     public void setConnection(Connection connection) {
         this.connection = connection;
@@ -46,47 +40,6 @@ public class MauterServiceImpl implements IMauterhebung {
         return connection;
     }
 
-    /***
-     * Die Methode realisiert einen Algorithmus, der die übermittelten
-     * Fahrzeugdaten mit der Datenbank auf Richtigkeit überprüft und für einen
-     * mautpflichtigen Streckenabschnitt die zu zahlende Maut für ein Fahrzeug
-     * im Automatischen Verfahren berechnet.
-     *
-     * Zuvor wird überprüft, ob das Fahrzeug registriert ist und über ein
-     * eingebautes Fahrzeuggerät verfügt und die übermittelten Daten des
-     * Kontrollsystems korrekt sind. Bei Fahrzeugen im Manuellen Verfahren wird
-     * darüberhinaus geprüft, ob es noch offene Buchungen für den Mautabschnitt
-     * gibt oder eine Doppelbefahrung aufgetreten ist. Besteht noch eine offene
-     * Buchung für den Mautabschnitt, so wird diese Buchung für das Fahrzeug auf
-     * abgeschlossen gesetzt.
-     *
-     * Sind die Daten des Fahrzeugs im Automatischen Verfahren korrekt, wird
-     * anhand der Mautkategorie (die sich aus der Achszahl und der
-     * Schadstoffklasse des Fahrzeugs zusammensetzt) und der Mautabschnittslänge
-     * die zu zahlende Maut berechnet, in der Mauterhebung gespeichert und
-     * letztendlich zurückgegeben.
-     *
-     *
-     * @param mautAbschnitt
-     *            - identifiziert einen mautpflichtigen Abschnitt
-     * @param achszahl
-     *            - identifiziert die Anzahl der Achsen für das Fahrzeug das
-     *            durch ein Kontrollsystem erfasst worden ist
-     * @param kennzeichen
-     *            - idenfiziert das amtliche Kennzeichen des Fahrzeugs das durch
-     *            das Kontrollsystem erfasst worden ist
-     * @throws UnkownVehicleException
-     *             - falls das Fahrzeug weder registriert ist, noch eine offene
-     *             Buchung vorliegt
-     * @throws InvalidVehicleDataException
-     *             - falls Daten des Kontrollsystems nicht mit den hinterlegten
-     *             Daten in der Datenbank übereinstimmt
-     * @throws AlreadyCruisedException
-     *             - falls eine Doppelbefahrung für Fahrzeuge im Manuellen
-     *             Verfahren vorliegt
-     * @return die berechnete Maut für das Fahrzeug im Automatischen Verfahren
-     *         auf dem Streckenabschnitt anhand der Fahrzeugdaten
-     */
     @Override
     public float berechneMaut(int mautAbschnitt, int achszahl, String kennzeichen)
             throws UnkownVehicleException, InvalidVehicleDataException, AlreadyCruisedException {
@@ -130,7 +83,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * berechnet die mautabschnittslänge
-     *
+     * @author Gruppe 07
      * @param mautAbschnitt der Mautabschnitt
      * @return mautAbschnittslänge die mautabschnittslänge in km
      **/
@@ -161,7 +114,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * berechnet den Mautsatz je km
-     *
+     * @author Gruppe 07
      * @param kennzeichen der Mautabschnitt
      * @return mautsatzJeKm der Mautsatz je Km in Euro
      **/
@@ -210,7 +163,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * Überprüft, ob es sich um ein manuelles Verfahren mit offenem Buchungsstatus handelt
-     *
+     * @autor Gruppe 07
      * @param kennzeichen   das Kennzeichen des Fahrzeugs
      * @param mautAbschnitt der mautAbschnitt
      * @return true, wenn das Verfahren offen ist || false, wenn nicht
@@ -256,7 +209,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * Überprüft, ob es sich um ein automatisches Verfahren handelt
-     *
+     * @author Gruppe 07
      * @param kennzeichen das Kennzeichen des Fahrzeugs
      * @return true, wenn es sich um ein automatisches Verfahren handelt || false, wenn nicht
      **/
@@ -283,7 +236,7 @@ public class MauterServiceImpl implements IMauterhebung {
     /**
      * prueft, ob das Fahrzeug bereits registriert und aktiv ist oder eine
      * manuelle offene Buchung fuer das Fahrzeug vorliegt
-     *
+     * @author Gruppe 07
      * @param kennzeichen , das Kennzeichen des Fahrzeugs
      * @return true wenn das Fahrzeug registiert ist || false wenn nicht
      **/
@@ -314,7 +267,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * Überprüft beim manuellen Verfahren, ob das Fahrzeug mit der korrekten Achszahl unterwegs ist
-     *
+     * @author Gruppe 07
      * @param kennzeichen das Kennzeichen des Fahrzeugs
      * @param achszahl    die achszahl
      * @return true, wenn das Fahrzeug mit der korrekten Achszahl unterwegs ist || false, wenn nicht
@@ -346,7 +299,7 @@ public class MauterServiceImpl implements IMauterhebung {
 
     /**
      * Überprüft beim automatischen Verfahren, ob das Fahrzeug mit der korrekten Achszahl unterwegs ist
-     *
+     * @author Gruppe 07
      * @param kennzeichen das Kennzeichen des Fahrzeugs
      * @param achszahl
      * @return true, wenn das Fahrzeug mit der korrekten Achszahl unterwegs ist|| false wenn nicht
