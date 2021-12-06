@@ -9,7 +9,10 @@ import java.util.List;
 
 import de.htwberlin.dao.BuchungDao;
 import de.htwberlin.dao.BuchungDaoImpl;
+import de.htwberlin.dao.MautkategorieDao;
+import de.htwberlin.dao.MautkategorieDaoImpl;
 import de.htwberlin.object.Buchung;
+import de.htwberlin.object.Mautkategorie;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import de.htwberlin.exceptions.AlreadyCruisedException;
@@ -118,6 +121,7 @@ public class MauterServiceImpl implements IMauterhebung {
      * @param kennzeichen der Mautabschnitt
      * @return mautsatzJeKm der Mautsatz je Km in Euro
      **/
+
     private float berechneMautsatzJeKm(String kennzeichen) {
         PreparedStatement preparedStatement;
         ResultSet resultSet;
@@ -136,11 +140,21 @@ public class MauterServiceImpl implements IMauterhebung {
             while (resultSet.next()) {
                 achszahl = resultSet.getInt("ACHSEN");
                 sskl_id = resultSet.getInt("SSKL_ID");
-            }
+            MautkategorieDao m_dao = new MautkategorieDaoImpl(getConnection());
+            Mautkategorie m = m_dao.findMautkategorie(sskl_id, ">= " + String.valueOf(achszahl));
+            input = m.getMautsatz_je_km() / 100;
+                DecimalFormat df = new DecimalFormat("#.###");
+            strMautsatzJeKm = df.format(input).replaceAll(",", ".");
+            mautsatzJeKm = Float.parseFloat(strMautsatzJeKm);
+        }
+        System.out.println("mautsatzJeKm: " + mautsatzJeKm);
+        return mautsatzJeKm;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+        /*
         try {
             String qString = "SELECT MAUTSATZ_JE_KM FROM MAUTKATEGORIE WHERE ACHSZAHL= ? AND SSKL_ID = ?";
             pst = getConnection().prepareStatement(qString);
@@ -160,6 +174,8 @@ public class MauterServiceImpl implements IMauterhebung {
             throw new RuntimeException(e);
         }
     }
+
+         */
 
     /**
      * Überprüft, ob es sich um ein manuelles Verfahren mit offenem Buchungsstatus handelt
