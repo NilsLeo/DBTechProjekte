@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 /**
  * beschreibt die Schnittstelle zu einer Buchung
- *
  * @author Patrick Dohmeier
  **/
 
@@ -16,15 +15,13 @@ public interface BuchungDao {
 
 	/**
 	 * aktualisiert eine Buchung
-	 *
 	 * @param buchung das Objekt Buchung, welches gespeichert werden soll
 	 **/
 	public void updateBuchung(Buchung buchung);
 
 	/**
 	 * findet eine Buchung
-	 *
-	 * @param Buchungid
+	 * @param Buchungid die Buchungid
 	 * @return das Objekt Buchung, welches gesucht wird
 	 */
 	public Buchung findBuchung(int Buchungid);
@@ -33,8 +30,7 @@ public interface BuchungDao {
 
 	/**
 	 * erzeugt eine neue Buchung
-	 *
-	 * @param Buchungsnummer
+	 * @param Buchungsnummer die Buchungsnummer
 	 * @return gibt eine neu Buchung zurück
 	 */
 	public Buchung createBuchung(int Buchungsnummer);

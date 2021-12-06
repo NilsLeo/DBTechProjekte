@@ -3,22 +3,19 @@ package de.htwberlin.dao;
 import de.htwberlin.object.Mautkategorie;
 /**
  * beschreibt die Schnittstelle zu einer Mautkategorie
- *
  * @author Gruppe 07
  **/
 public interface MautkategorieDao {
 
         /**
          * aktualisiert eine Mautkategorie
-         *
          * @param mautkategorie das Objekt Mautkategorie, welches gespeichert werden soll
          **/
         public void updateMautkategorie(Mautkategorie mautkategorie);
 
         /**
          * findet eine Mautkategorie
-         *
-         * @param Mautkategorieid
+         * @param Mautkategorieid die
          * @return das Objekt Mautkategorie, welches gesucht wird
          */
         public Mautkategorie findMautkategorie(int Mautkategorieid);
@@ -27,8 +24,7 @@ public interface MautkategorieDao {
 
         /**
          * erzeugt eine neue Mautkategorie
-         *
-         * @param Mautkategorienummer
+         * @param Mautkategorienummer die Mautkategorienummer
          * @return gibt eine neu Mautkategorie zurück
          */
         public Mautkategorie createMautkategorie(int Mautkategorienummer);
