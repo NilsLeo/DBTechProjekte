@@ -53,6 +53,35 @@ public class BuchungDaoImpl implements BuchungDao {
 	}
 
 	@Override
+	public Buchung findBuchung(String kennzeichen, int abschnitts_id, int b_id) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "select * from Buchung where kennzeichen=? and abschnitts_id=? and b_id=?";
+		Buchung b = null;
+		try {
+			ps = getConnection().prepareStatement(query);
+			ps.setString(1, kennzeichen);
+			ps.setInt(2, abschnitts_id);
+			ps.setInt(3, b_id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				b = new Buchung();
+				b.setBuchung_id(rs.getInt("BUCHUNG_ID"));
+				b.setB_id(rs.getInt("B_ID"));
+				b.setAbschnitts_id(rs.getInt("ABSCHNITTS_ID"));
+				b.setKategorie_id(rs.getInt("KATEGORIE_ID"));
+				b.setKennzeichen(rs.getString("KENNZEICHEN"));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return b;
+	}
+
+	@Override
 	public Buchung findBuchung(int Buchungid) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
