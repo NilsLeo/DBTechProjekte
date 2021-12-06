@@ -2,6 +2,10 @@ package de.htwberlin.dao;
 
 import de.htwberlin.object.Buchung;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * beschreibt die Schnittstelle zu einer Buchung
  *

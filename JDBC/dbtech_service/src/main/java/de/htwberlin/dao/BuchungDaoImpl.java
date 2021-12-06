@@ -116,5 +116,4 @@ public class BuchungDaoImpl implements BuchungDao {
 		b.setAbschnitts_id(1200);
 		return b;
 	}
-
 }
